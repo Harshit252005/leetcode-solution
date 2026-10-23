@@ -2,17 +2,17 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         
-        unordered_set<char> window;
+        int freq[128]={0};
         int l=0;
         int max_len = 0;
 
         for(int r = 0; r<s.length();r++){
-            while(window.count(s[r])){
-                window.erase(s[l]);
+            while(freq[s[r]]>0){
+                freq[s[l]]--;
                 l++;
             }
 
-            window.insert(s[r]);
+            freq[s[r]]++;
             max_len = max(max_len, r-l+1);
         
         }
